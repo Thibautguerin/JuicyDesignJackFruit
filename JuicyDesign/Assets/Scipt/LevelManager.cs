@@ -26,11 +26,14 @@ public class LevelManager : MonoBehaviour
     private int shipHp = 1;
     [SerializeField]
     private float shipCooldown = 1;
+    [SerializeField]
+    private float shipBulletSpeed = 2;
 
     #region Geter
     public float ShipSpeed { get => shipSpeed;}
     public int ShipHp { get => shipHp;}
     public float ShipCooldown { get => shipCooldown;}
+    public float ShipBulletSpeed { get => shipBulletSpeed;}
     #endregion
 
     [Header("GeneralVariable - Enemy")]
@@ -41,11 +44,14 @@ public class LevelManager : MonoBehaviour
     private int nbEnemyInRow = 5;
     [SerializeField]
     private int nbRow = 3;
+    [SerializeField]
+    private float enemyBulletSpeed = 2;
 
     #region Geter
     public float EnemySpeed { get => enemySpeed;}
     public int NbEnemyInRow { get => nbEnemyInRow;}
     public int NbRow { get => nbRow;}
+    public float EnemyBulletSpeed { get => enemyBulletSpeed;}
     #endregion
 
     // Start is called before the first frame update
