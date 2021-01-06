@@ -6,12 +6,14 @@ public class Enemy : MonoBehaviour
 {
 
     private MeshRenderer meshRenderer;
+    private MeshRenderer visibleRender;
     private Coroutine routine;
     private bool radarState;
 
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
+        visibleRender = transform.GetChild(0).GetComponent<MeshRenderer>();
     }
 
     private void Update()
@@ -25,6 +27,9 @@ public class Enemy : MonoBehaviour
             Color color = meshRenderer.material.color;
             color.a = b ? 0 : 1;
             meshRenderer.material.color = color;
+            color = visibleRender.material.color;
+            color.a = b ? 0 : 1;
+            visibleRender.material.color = color;
         }
     }
 
@@ -40,6 +45,9 @@ public class Enemy : MonoBehaviour
             Color color = meshRenderer.material.color;
             color.a = 1;
             meshRenderer.material.color = color;
+            color = visibleRender.material.color;
+            color.a = 1;
+            visibleRender.material.color = color;
         }
 
     }
@@ -51,6 +59,9 @@ public class Enemy : MonoBehaviour
             Color color = meshRenderer.material.color;
             color.a = 1;
             meshRenderer.material.color = color;
+            color = visibleRender.material.color;
+            color.a = 1;
+            visibleRender.material.color = color;
             routine = StartCoroutine(fadeRoutine());
         }
     }
@@ -66,7 +77,9 @@ public class Enemy : MonoBehaviour
             Color color = meshRenderer.material.color;
             color.a = Mathf.Lerp(0, 1, 1 - (timer / maxTime));
             meshRenderer.material.color = color;
-
+            color = visibleRender.material.color;
+            color.a = Mathf.Lerp(0, 1, 1 - (timer / maxTime));
+            visibleRender.material.color = color;
         }
         routine = null;
     }
