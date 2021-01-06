@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour
     }
     #endregion
 
+    #region Ship
     [Header("GeneralVariable - Ship")]
 
     [SerializeField]
@@ -35,7 +36,9 @@ public class LevelManager : MonoBehaviour
     public float ShipCooldown { get => shipCooldown;}
     public float ShipBulletSpeed { get => shipBulletSpeed;}
     #endregion
+    #endregion
 
+    #region Enemy
     [Header("GeneralVariable - Enemy")]
 
     [SerializeField]
@@ -46,12 +49,33 @@ public class LevelManager : MonoBehaviour
     private int nbRow = 3;
     [SerializeField]
     private float enemyBulletSpeed = 2;
+    private Vector2 enemySize = Vector2.one;
+    [SerializeField]
+    private float enemyYOffset = 0.5f;
 
     #region Geter
     public float EnemySpeed { get => enemySpeed;}
     public int NbEnemyInRow { get => nbEnemyInRow;}
     public int NbRow { get => nbRow;}
     public float EnemyBulletSpeed { get => enemyBulletSpeed;}
+    public Vector2 EnemySize { get => enemySize;}
+    public float EnemyYOffset { get => enemyYOffset; }
+    #endregion
+    #endregion
+
+    #region Radar
+    [Header("GeneralVariable - Radar")]
+
+    [SerializeField]
+    private float radarRotationSpeed = 180;
+    [SerializeField]
+    private float radarFadeDuration = 0.5f;
+
+    #region Geter
+    public float RadarRotationSpeed { get => radarRotationSpeed;}
+    public float RadarFadeDuration { get => radarFadeDuration; }
+    #endregion
+
     #endregion
 
     // Start is called before the first frame update
