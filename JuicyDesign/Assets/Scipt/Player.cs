@@ -52,6 +52,7 @@ public class Player : MonoBehaviour
         else
         {
             actualSpeed = horizontal * LevelManager.Instance.ShipSpeed;
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(actualSpeed, 0);
