@@ -26,6 +26,8 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag == "Scan")
+            return;
         if (collision.CompareTag("Player"))
         {
             if (direction == Direction.UP)
@@ -41,6 +43,7 @@ public class Bullet : MonoBehaviour
         {
             if (direction == Direction.DOWN)
                 return;
+            Destroy(collision.gameObject);
         }
 
         Destroy(gameObject);
