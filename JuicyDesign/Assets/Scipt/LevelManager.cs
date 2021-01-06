@@ -33,7 +33,8 @@ public class LevelManager : MonoBehaviour
     private float shipAcceleration = 4;
     [SerializeField]
     private float shipDeceleration = 4;
-
+    [SerializeField]
+    private float shipMaxRotation = 25;
 
     #region Geter
     public float ShipSpeed { get => shipSpeed;}
@@ -42,6 +43,7 @@ public class LevelManager : MonoBehaviour
     public float ShipBulletSpeed { get => shipBulletSpeed;}
     public float ShipAcceleration { get => shipAcceleration;}
     public float ShipDeceleration { get => shipDeceleration;}
+    public float ShipMaxRotation { get => shipMaxRotation;}
     #endregion
     #endregion
 
