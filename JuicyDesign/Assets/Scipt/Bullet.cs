@@ -35,10 +35,12 @@ public class Bullet : MonoBehaviour
         {
             float randRotation = Random.Range(LevelManager.Instance.ShipBulletRotSpeedMin, LevelManager.Instance.ShipBulletRotSpeedMax);
             gameObject.transform.Rotate(Vector2.up, randRotation);
+            gameObject.transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
         }
         else
         {
             gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
+            gameObject.transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
         }
     }
 
