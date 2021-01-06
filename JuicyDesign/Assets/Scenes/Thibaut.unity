@@ -220,7 +220,7 @@ MonoBehaviour:
   shipSpeed: 8
   shipHp: 1
   shipCooldown: 1
-  shipBulletSpeed: 10
+  shipBulletSpeed: 4
   shipAcceleration: 4
   shipDeceleration: 4
   shipMaxRotationY: 50
@@ -228,7 +228,7 @@ MonoBehaviour:
   enemySpeed: 2
   nbEnemyInRow: 5
   nbRow: 3
-  enemyBulletSpeed: 10
+  enemyBulletSpeed: 4
   enemySize: {x: 1, y: 1}
   enemyYOffset: 0.5
   radarRotationSpeed: 180
@@ -236,6 +236,9 @@ MonoBehaviour:
   activationInputs:
   - name: Player Inertia
     input: 105
+    isActive: 0
+  - name: Bullet Effect
+    input: 98
     isActive: 0
 --- !u!1 &467995124
 GameObject:

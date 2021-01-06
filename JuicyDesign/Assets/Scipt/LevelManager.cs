@@ -28,7 +28,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private float shipCooldown = 1;
     [SerializeField]
-    private float shipBulletSpeed = 2;
+    private float shipBulletSpeed = 4;
+    [SerializeField]
+    private float shipBulletRotSpeedMin = 0.5f;
+    [SerializeField]
+    private float shipBulletRotSpeedMax = 1.5f;
     [SerializeField]
     private float shipAcceleration = 4;
     [SerializeField]
@@ -43,6 +47,8 @@ public class LevelManager : MonoBehaviour
     public int ShipHp { get => shipHp;}
     public float ShipCooldown { get => shipCooldown;}
     public float ShipBulletSpeed { get => shipBulletSpeed;}
+    public float ShipBulletRotSpeedMin { get => shipBulletRotSpeedMin;}
+    public float ShipBulletRotSpeedMax { get => shipBulletRotSpeedMax;}
     public float ShipAcceleration { get => shipAcceleration;}
     public float ShipDeceleration { get => shipDeceleration;}
     public float ShipMaxRotationY { get => shipMaxRotationY;}
@@ -60,7 +66,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private int nbRow = 3;
     [SerializeField]
-    private float enemyBulletSpeed = 2;
+    private float enemyBulletSpeed = 4;
     [SerializeField]
     private Vector2 enemySize = Vector2.one;
     [SerializeField]

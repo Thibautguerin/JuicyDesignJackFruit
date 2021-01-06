@@ -14,6 +14,14 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
+        bool activeBulletEffects = false;
+
+        foreach (var item in LevelManager.Instance.activationInputs)
+        {
+            if (item.name == "Bullet Effect")
+                activeBulletEffects = item.isActive;
+        }
+
         if (direction == Direction.UP)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, LevelManager.Instance.ShipBulletSpeed);
@@ -21,6 +29,16 @@ public class Bullet : MonoBehaviour
         else
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, -LevelManager.Instance.ShipBulletSpeed);
+        }
+
+        if (activeBulletEffects)
+        {
+            float randRotation = Random.Range(LevelManager.Instance.ShipBulletRotSpeedMin, LevelManager.Instance.ShipBulletRotSpeedMax);
+            gameObject.transform.Rotate(Vector2.up, randRotation);
+        }
+        else
+        {
+            gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
         }
     }
 
