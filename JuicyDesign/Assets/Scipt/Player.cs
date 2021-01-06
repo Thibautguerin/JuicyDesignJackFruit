@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public Bullet bullet;
 
     private float actualHp;
+    private float actualSpeed;
     private float startCooldown = 0f;
     private bool canShoot = true;
 
@@ -18,11 +19,40 @@ public class Player : MonoBehaviour
     void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
+        bool activeInertia = false;
 
-        if (horizontal != 0)
+        foreach (var item in LevelManager.Instance.activationInputs)
         {
-            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(horizontal * LevelManager.Instance.ShipSpeed, 0);
+            if (item.name == "Player Inertia")
+                activeInertia = item.isActive;
         }
+
+        if (activeInertia)
+        {
+            if (horizontal > 0)
+            {
+                if (actualSpeed < LevelManager.Instance.ShipSpeed)
+                    actualSpeed += LevelManager.Instance.ShipAcceleration * Time.deltaTime;
+            }
+            else if (horizontal < 0)
+            {
+                if (actualSpeed > -LevelManager.Instance.ShipSpeed)
+                    actualSpeed -= LevelManager.Instance.ShipAcceleration * Time.deltaTime;
+            }
+            else
+            {
+                if (actualSpeed > 0)
+                    actualSpeed -= LevelManager.Instance.ShipDeceleration * Time.deltaTime;
+                else if (actualSpeed < 0)
+                    actualSpeed += LevelManager.Instance.ShipDeceleration * Time.deltaTime;
+            }
+        }
+        else
+        {
+            actualSpeed = horizontal * LevelManager.Instance.ShipSpeed;
+        }
+
+        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(actualSpeed, 0);
 
         if (Input.GetKeyDown(KeyCode.Space) && canShoot)
         {
@@ -40,5 +70,10 @@ public class Player : MonoBehaviour
     public void TakeDamage()
     {
         actualHp--;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        actualSpeed = 0;
     }
 }

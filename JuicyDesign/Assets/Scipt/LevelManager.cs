@@ -29,12 +29,19 @@ public class LevelManager : MonoBehaviour
     private float shipCooldown = 1;
     [SerializeField]
     private float shipBulletSpeed = 2;
+    [SerializeField]
+    private float shipAcceleration = 4;
+    [SerializeField]
+    private float shipDeceleration = 4;
+
 
     #region Geter
     public float ShipSpeed { get => shipSpeed;}
     public int ShipHp { get => shipHp;}
     public float ShipCooldown { get => shipCooldown;}
     public float ShipBulletSpeed { get => shipBulletSpeed;}
+    public float ShipAcceleration { get => shipAcceleration;}
+    public float ShipDeceleration { get => shipDeceleration;}
     #endregion
     #endregion
 

@@ -221,10 +221,20 @@ MonoBehaviour:
   shipHp: 1
   shipCooldown: 1
   shipBulletSpeed: 10
+  shipAcceleration: 4
+  shipDeceleration: 4
   enemySpeed: 2
   nbEnemyInRow: 5
   nbRow: 3
   enemyBulletSpeed: 10
+  enemySize: {x: 1, y: 1}
+  enemyYOffset: 0.5
+  radarRotationSpeed: 180
+  radarFadeDuration: 0.5
+  activationInputs:
+  - name: Player Inertia
+    input: 105
+    isActive: 0
 --- !u!1 &467995124
 GameObject:
   m_ObjectHideFlags: 0
