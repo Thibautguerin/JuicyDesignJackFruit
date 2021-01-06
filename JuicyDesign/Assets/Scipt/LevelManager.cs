@@ -79,6 +79,9 @@ public class LevelManager : MonoBehaviour
 
     #endregion
 
+    [Header("EffectInputs")]
+    public List<ActivationInput> activationInputs = new List<ActivationInput>();
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -88,6 +91,18 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        foreach (var item in activationInputs)
+        {
+            if (Input.GetKeyDown(item.input))
+                item.isActive = !item.isActive;
+        }
     }
+}
+
+[System.Serializable]
+public class ActivationInput
+{
+    public string name;
+    public KeyCode input;
+    public bool isActive = false;
 }

@@ -7,18 +7,30 @@ public class Enemy : MonoBehaviour
 
     private MeshRenderer meshRenderer;
     private Coroutine routine;
+    private bool radarState;
 
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
-        Color color = meshRenderer.material.color;
-        color.a = 0;
-        meshRenderer.material.color = color;
+    }
+
+    private void Update()
+    {
+        bool b = LevelManager.Instance.activationInputs.Find(x => x.name == "Radar").isActive;
+        if(radarState!= b)
+        {
+            if (routine != null)
+                StopCoroutine(routine);
+            radarState = b;
+            Color color = meshRenderer.material.color;
+            color.a = b ? 0 : 1;
+            meshRenderer.material.color = color;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Scan")
+        if(collision.tag == "Scan" && LevelManager.Instance.activationInputs.Find(x => x.name == "Radar").isActive)
         {
             if (routine != null)
             {
@@ -34,7 +46,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Scan")
+        if (collision.tag == "Scan" && LevelManager.Instance.activationInputs.Find(x => x.name == "Radar").isActive)
         {
             Color color = meshRenderer.material.color;
             color.a = 1;
