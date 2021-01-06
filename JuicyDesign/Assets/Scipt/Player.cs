@@ -10,8 +10,6 @@ public class Player : MonoBehaviour
     private float actualSpeed;
     private float startCooldown = 0f;
     private bool canShoot = true;
-        
-    private float lastRotation = 0;
 
     private void Start()
     {
@@ -49,8 +47,7 @@ public class Player : MonoBehaviour
                     actualSpeed += LevelManager.Instance.ShipDeceleration * Time.deltaTime;
             }
 
-            gameObject.transform.Rotate(0, 0, -horizontal * LevelManager.Instance.ShipMaxRotation - lastRotation);
-            lastRotation = -horizontal * LevelManager.Instance.ShipMaxRotation;
+            gameObject.transform.rotation = Quaternion.Euler(0, -horizontal * LevelManager.Instance.ShipMaxRotationY, -horizontal * LevelManager.Instance.ShipMaxRotationZ);
         }
         else
         {
