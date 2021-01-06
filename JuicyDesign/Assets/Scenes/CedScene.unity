@@ -281,9 +281,11 @@ MonoBehaviour:
   shipSpeed: 2
   shipHp: 1
   shipCooldown: 1
+  shipBulletSpeed: 2
   enemySpeed: 2
   nbEnemyInRow: 5
   nbRow: 3
+  enemyBulletSpeed: 2
   enemySize: {x: 1.5, y: 1.5}
   enemyYOffset: 0.5
   radarRotationSpeed: 180

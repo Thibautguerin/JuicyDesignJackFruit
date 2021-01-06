@@ -49,6 +49,7 @@ public class LevelManager : MonoBehaviour
     private int nbRow = 3;
     [SerializeField]
     private float enemyBulletSpeed = 2;
+    [SerializeField]
     private Vector2 enemySize = Vector2.one;
     [SerializeField]
     private float enemyYOffset = 0.5f;
