@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
-        visibleRender = transform.GetChild(1).GetComponent<MeshRenderer>();
+        visibleRender = transform.GetChild(0).GetComponent<MeshRenderer>();
         enemy.SetActive(false);
         player.SetActive(false);
     }
@@ -47,24 +47,6 @@ public class Bullet : MonoBehaviour
         else
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, -LevelManager.Instance.ShipBulletSpeed);
-        }
-
-        if (activeBulletEffects)
-        {
-            float randRotation = Random.Range(LevelManager.Instance.ShipBulletRotSpeedMin, LevelManager.Instance.ShipBulletRotSpeedMax);
-            if(direction == Direction.UP)
-                gameObject.transform.Rotate(Vector2.up, randRotation);
-            else
-                gameObject.transform.Rotate(Vector2.down, randRotation);
-            gameObject.transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
-        }
-        else
-        {
-            if(direction == Direction.UP)
-                gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
-            else
-                gameObject.transform.rotation = Quaternion.Euler(0,0,180);
-            gameObject.transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
         }
 
         bool b = LevelManager.Instance.activationInputs.Find(x => x.name == "Radar").isActive;
