@@ -88,7 +88,8 @@ public class Bullet : MonoBehaviour
         {
             if (LevelManager.Instance.activationInputs.Find(x => x.name == "Sounds").isActive)
             {
-                audioSource.PlayOneShot(radarSound);
+                if (direction != Direction.UP)
+                    audioSource.PlayOneShot(radarSound);
                 if (direction != Direction.UP && (transform.position - collision.transform.position).magnitude <= 3)
                     collision.transform.parent.GetComponent<AudioSource>().PlayOneShot(alarmSound);
             }
