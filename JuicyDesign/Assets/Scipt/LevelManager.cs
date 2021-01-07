@@ -106,6 +106,9 @@ public class LevelManager : MonoBehaviour
     [Header("EffectInputs")]
     public List<ActivationInput> activationInputs = new List<ActivationInput>();
 
+    [Header("Sounds")]
+    public List<Sound> sounds = new List<Sound>();
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -129,4 +132,11 @@ public class ActivationInput
     public string name;
     public KeyCode input;
     public bool isActive = false;
+}
+
+[System.Serializable]
+public class Sound
+{
+    public string name;
+    public AudioClip sound;
 }

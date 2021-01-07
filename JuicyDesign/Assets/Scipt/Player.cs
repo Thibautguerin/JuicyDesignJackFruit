@@ -13,9 +13,39 @@ public class Player : MonoBehaviour
     private bool canShoot = true;
     private bool canMove = true;
 
+    private AudioClip shotSound;
+    private AudioClip destructionSound;
+    private AudioClip movementSound;
+    private AudioClip motorSound;
+
+    private AudioSource audioSource;
+    private AudioSource motorAudioSource;
+
     private void Start()
     {
         actualHp = LevelManager.Instance.ShipHp;
+        audioSource = GetComponent<AudioSource>();
+
+        foreach (var item in LevelManager.Instance.sounds)
+        {
+            if (item.name == "Shot Sound")
+                shotSound = item.sound;
+            if (item.name == "Destruction Sound")
+                destructionSound = item.sound;
+            if (item.name == "Movement Sound")
+                movementSound = item.sound;
+            if (item.name == "Motor Sound")
+                motorSound = item.sound;
+        }
+
+        audioSource.loop = true;
+        audioSource.clip = movementSound;
+        audioSource.Play();
+
+        motorAudioSource = transform.GetChild(0).GetComponent<AudioSource>();
+        motorAudioSource.loop = true;
+        motorAudioSource.clip = motorSound;
+        motorAudioSource.Play();
     }
 
     void Update()
@@ -64,6 +94,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && canShoot && canMove)
         {
+            audioSource.PlayOneShot(shotSound);
             LevelManager.Instance.CameraAnimator.SetTrigger("Shooting");
             transform.DOMoveY(transform.position.y - 0.2f, 0.18f).OnComplete(() =>
             {
@@ -82,6 +113,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage()
     {
+        audioSource.PlayOneShot(destructionSound);
         actualHp--;
         if (actualHp <= 0)
         {
