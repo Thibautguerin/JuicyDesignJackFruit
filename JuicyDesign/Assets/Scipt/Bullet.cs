@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     }
 
     public Direction direction = Direction.UP;
+    public GameObject explosion;
 
     private MeshRenderer meshRenderer;
     private MeshRenderer visibleRender;
@@ -116,6 +117,9 @@ public class Bullet : MonoBehaviour
         }
 
         Destroy(gameObject);
+        Vector3 position = transform.position + Vector3.forward * -1;
+        GameObject instance = Instantiate(explosion, position, Quaternion.identity);
+        Destroy(instance, 1.5f);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
