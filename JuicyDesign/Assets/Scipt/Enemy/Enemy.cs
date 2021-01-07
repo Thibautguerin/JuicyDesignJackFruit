@@ -60,14 +60,16 @@ public class Enemy : MonoBehaviour
             visibleRender.material.color = color;
         }
 
-        transform.Translate((goRight ? offsetSpeed : -offsetSpeed) * Time.deltaTime, 0, 0);
+        if(LevelManager.Instance.activationInputs.Find(x => x.name == "Enemy").isActive)
+            transform.Translate((goRight ? offsetSpeed : -offsetSpeed) * Time.deltaTime, 0, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Scan" && LevelManager.Instance.activationInputs.Find(x => x.name == "Radar").isActive)
         {
-            audioSource.PlayOneShot(radarSound, 0.4f);
+            if(LevelManager.Instance.activationInputs.Find(x => x.name == "Sounds").isActive)
+                audioSource.PlayOneShot(radarSound, 0.4f);
             if (routine != null)
             {
                 StopCoroutine(routine);
@@ -99,13 +101,25 @@ public class Enemy : MonoBehaviour
 
     public void Destruction()
     {
-        transform.parent = null;
-        audioSource.PlayOneShot(destructionSound);
-        transform.DORotate(new Vector3(0, 180, 180), 1.5f);
-        transform.DOScale(0.01f, 2).OnComplete(() =>
+        bool sounds = LevelManager.Instance.activationInputs.Find(x => x.name == "Sounds").isActive;
+        if (sounds)
+            audioSource.PlayOneShot(destructionSound);
+        if (LevelManager.Instance.activationInputs.Find(x => x.name == "Enemy").isActive)
         {
-            Destroy(gameObject);
-        });
+            transform.parent = null;
+            transform.DORotate(new Vector3(0, 180, 180), 1.5f);
+            transform.DOScale(0.01f, 2).OnComplete(() =>
+            {
+                Destroy(gameObject);
+            });
+        }
+        else
+        {
+            if (sounds)
+                Destroy(gameObject, 0.5f);
+            else
+                Destroy(gameObject);
+        }
     }
 
     IEnumerator fadeRoutine()
