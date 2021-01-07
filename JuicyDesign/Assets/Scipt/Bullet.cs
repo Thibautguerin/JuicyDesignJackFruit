@@ -26,8 +26,11 @@ public class Bullet : MonoBehaviour
     {
         meshRenderer = GetComponent<MeshRenderer>();
         visibleRender = transform.GetChild(0).GetComponent<MeshRenderer>();
-        enemy.SetActive(false);
-        player.SetActive(false);
+        if (LevelManager.Instance.activationInputs.Find(x => x.name == "Radar").isActive)
+        {
+            enemy.SetActive(false);
+            player.SetActive(false);
+        }
     }
 
     void Update()
