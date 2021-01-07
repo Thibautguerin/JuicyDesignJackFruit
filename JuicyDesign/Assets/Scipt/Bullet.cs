@@ -104,6 +104,7 @@ public class Bullet : MonoBehaviour
             if (player)
             {
                 player.TakeDamage();
+                LevelManager.Instance.CameraAnimator.SetTrigger("SubmarineHit");
             }
         }
        else if (collision.CompareTag("Enemy"))
@@ -111,6 +112,7 @@ public class Bullet : MonoBehaviour
             if (direction == Direction.DOWN)
                 return;
             Destroy(collision.gameObject);
+            LevelManager.Instance.CameraAnimator.SetTrigger("ShipHit");
         }
 
         Destroy(gameObject);

@@ -74,6 +74,8 @@ public class Player : MonoBehaviour
     public void TakeDamage()
     {
         actualHp--;
+        if (actualHp <= 0)
+            Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
