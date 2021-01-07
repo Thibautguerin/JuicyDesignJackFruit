@@ -21,7 +21,7 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Vector2 spawnPosition = transform.position;
+        Vector3 spawnPosition = transform.position;
         for (int i = 0; i < LevelManager.Instance.NbRow; i++)
         {
             EnemyRow instance = Instantiate(enemyRowPrefab, transform);

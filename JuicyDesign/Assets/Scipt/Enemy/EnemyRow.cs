@@ -17,7 +17,7 @@ public class EnemyRow : MonoBehaviour
     void Start()
     {
         enemyManager = GetComponentInParent<EnemyManager>();
-        Vector2 spawnPosition = transform.position;
+        Vector3 spawnPosition = transform.position;
         for (int i = 0; i < LevelManager.Instance.NbEnemyInRow; i++)
         {
             Enemy instance = Instantiate(enemyPrefab, transform);
