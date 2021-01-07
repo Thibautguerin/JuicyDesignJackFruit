@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class LevelManager : MonoBehaviour
 {
@@ -109,10 +110,15 @@ public class LevelManager : MonoBehaviour
     [Header("Sounds")]
     public List<Sound> sounds = new List<Sound>();
 
+    private PostProcessLayer postProcess;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Awake()
     {
         SingletonAwake();
+        postProcess = Camera.main.GetComponent<PostProcessLayer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -123,6 +129,14 @@ public class LevelManager : MonoBehaviour
             if (Input.GetKeyDown(item.input))
                 item.isActive = !item.isActive;
         }
+        if (!postProcess.enabled && activationInputs.Find(x => x.name == "Juicy Camera").isActive)
+            postProcess.enabled = true;
+        else if(postProcess.enabled && !activationInputs.Find(x => x.name == "Juicy Camera").isActive)
+            postProcess.enabled = false;
+        if (!audioSource.enabled && activationInputs.Find(x => x.name == "Sounds").isActive)
+            audioSource.enabled = true;
+        else if (audioSource.enabled && !activationInputs.Find(x => x.name == "Sounds").isActive)
+            audioSource.enabled = false;
     }
 }
 

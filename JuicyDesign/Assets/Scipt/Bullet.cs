@@ -48,7 +48,10 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-
+        if (!audioSource.enabled && LevelManager.Instance.activationInputs.Find(x => x.name == "Sounds").isActive)
+            audioSource.enabled = true;
+        else if (audioSource.enabled && !LevelManager.Instance.activationInputs.Find(x => x.name == "Sounds").isActive)
+            audioSource.enabled = false;
         if(!LevelManager.Instance.activationInputs.Find(x => x.name == "Juicy VFX").isActive)
         {
             enemy.SetActive(false);
