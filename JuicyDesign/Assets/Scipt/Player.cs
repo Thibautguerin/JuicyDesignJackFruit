@@ -175,7 +175,13 @@ public class Player : MonoBehaviour
             }
             else
             {
-                Destroy(gameObject);
+                if (activeSounds)
+                {
+                    GetComponent<MeshRenderer>().enabled = false;
+;                   Destroy(gameObject, 2);
+                }
+                else
+                    Destroy(gameObject);
                 LevelManager.Instance.gameObject.AddComponent(typeof(AudioListener));
             }
         }

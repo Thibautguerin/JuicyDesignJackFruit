@@ -116,7 +116,11 @@ public class Enemy : MonoBehaviour
         else
         {
             if (sounds)
-                Destroy(gameObject, 0.5f);
+            {
+                GetComponent<MeshRenderer>().enabled = false;
+                transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+                Destroy(gameObject, 2f);
+            }
             else
                 Destroy(gameObject);
         }
