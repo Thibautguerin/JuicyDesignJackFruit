@@ -128,6 +128,7 @@ public class Player : MonoBehaviour
             transform.DOScale(0.01f, 2).OnComplete(() =>
             {
                 Destroy(gameObject);
+                LevelManager.Instance.gameObject.AddComponent(typeof(AudioListener));
             });
         }
     }
