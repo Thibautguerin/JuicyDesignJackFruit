@@ -9,11 +9,19 @@ public class Enemy : MonoBehaviour
     private MeshRenderer visibleRender;
     private Coroutine routine;
     private bool radarState;
+    private bool goRight = true;
+
+    [SerializeField]
+    private float maxXOffset = 0.5f;
+    [SerializeField]
+    private float offsetSpeed = 0.1f;
+
 
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         visibleRender = transform.GetChild(0).GetComponent<MeshRenderer>();
+        StartCoroutine(DirectionRoutine());
     }
 
     private void Update()
@@ -31,6 +39,8 @@ public class Enemy : MonoBehaviour
             color.a = b ? 0 : 1;
             visibleRender.material.color = color;
         }
+
+        transform.Translate((goRight ? offsetSpeed : -offsetSpeed) * Time.deltaTime, 0, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -82,6 +92,21 @@ public class Enemy : MonoBehaviour
             visibleRender.material.color = color;
         }
         routine = null;
+    }
+
+    IEnumerator DirectionRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.2f);
+            float xOffset = LevelManager.Instance.EnemySize.x * transform.GetSiblingIndex() - transform.localPosition.x;
+            if (goRight && xOffset > 0 || !goRight && xOffset < 0)
+            {
+                float random = Random.Range(0f, 1f);
+                if (random > 1 - Mathf.Abs(xOffset) / maxXOffset)
+                    goRight = !goRight;
+            }
+        }
     }
 
 }
