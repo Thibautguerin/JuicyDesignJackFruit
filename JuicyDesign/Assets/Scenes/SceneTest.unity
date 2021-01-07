@@ -596,9 +596,39 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2857872664986689804, guid: a1f483b8146096344a55451dde18693f,
         type: 3}
+      propertyPath: shipSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857872664986689804, guid: a1f483b8146096344a55451dde18693f,
+        type: 3}
+      propertyPath: enemySpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857872664986689804, guid: a1f483b8146096344a55451dde18693f,
+        type: 3}
       propertyPath: cameraAnimator
       value: 
       objectReference: {fileID: 641444790}
+    - target: {fileID: 2857872664986689804, guid: a1f483b8146096344a55451dde18693f,
+        type: 3}
+      propertyPath: shipBulletSpeed
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857872664986689804, guid: a1f483b8146096344a55451dde18693f,
+        type: 3}
+      propertyPath: enemyBulletSpeed
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857872664986689804, guid: a1f483b8146096344a55451dde18693f,
+        type: 3}
+      propertyPath: radarFadeDuration
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857872664986689804, guid: a1f483b8146096344a55451dde18693f,
+        type: 3}
+      propertyPath: radarRotationSpeed
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 2857872664986689806, guid: a1f483b8146096344a55451dde18693f,
         type: 3}
       propertyPath: m_Name
