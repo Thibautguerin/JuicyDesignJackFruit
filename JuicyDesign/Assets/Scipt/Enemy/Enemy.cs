@@ -99,6 +99,7 @@ public class Enemy : MonoBehaviour
 
     public void Destruction()
     {
+        transform.parent = null;
         audioSource.PlayOneShot(destructionSound);
         transform.DORotate(new Vector3(0, 180, 180), 1.5f);
         transform.DOScale(0.01f, 2).OnComplete(() =>
