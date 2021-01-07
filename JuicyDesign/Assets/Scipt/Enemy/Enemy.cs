@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     public AudioSource audioSource;
 
     private AudioClip destructionSound;
+    private AudioClip radarSound;
 
     private void Awake()
     {
@@ -38,6 +39,8 @@ public class Enemy : MonoBehaviour
                 shotSound = item.sound;
             if (item.name == "Destruction Sound")
                 destructionSound = item.sound;
+            if (item.name == "Radar Sound")
+                radarSound = item.sound;
         }
     }
 
@@ -64,6 +67,7 @@ public class Enemy : MonoBehaviour
     {
         if(collision.tag == "Scan" && LevelManager.Instance.activationInputs.Find(x => x.name == "Radar").isActive)
         {
+            audioSource.PlayOneShot(radarSound, 0.4f);
             if (routine != null)
             {
                 StopCoroutine(routine);
