@@ -16,12 +16,26 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float offsetSpeed = 0.1f;
 
+    private AudioClip shotSound;
+    private AudioClip destructionSound;
+
+    private AudioSource audioSource;
 
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         visibleRender = transform.GetChild(0).GetComponent<MeshRenderer>();
         StartCoroutine(DirectionRoutine());
+
+        audioSource = GetComponent<AudioSource>();
+
+        foreach (var item in LevelManager.Instance.sounds)
+        {
+            if (item.name == "Shot Sound")
+                shotSound = item.sound;
+            if (item.name == "Destruction Sound")
+                destructionSound = item.sound;
+        }
     }
 
     private void Update()
