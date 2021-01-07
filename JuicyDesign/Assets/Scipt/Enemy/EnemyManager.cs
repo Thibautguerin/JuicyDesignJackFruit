@@ -9,6 +9,7 @@ public class EnemyManager : MonoBehaviour
 
     private float targetY;
     private bool goDown = false;
+    private List<EnemyRow> enemyRows = new List<EnemyRow>();
 
     public bool enemyGoDown { get => goDown;}
     public void GoDown()
@@ -24,9 +25,11 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < LevelManager.Instance.NbRow; i++)
         {
             EnemyRow instance = Instantiate(enemyRowPrefab, transform);
+            enemyRows.Add(instance);
             instance.transform.position = spawnPosition;
             spawnPosition.y -= LevelManager.Instance.EnemySize.y;
         }
+        StartCoroutine(ShootRoutine());
     }
 
     // Update is called once per frame
@@ -40,6 +43,19 @@ public class EnemyManager : MonoBehaviour
             if (transform.position.y < targetY)
                 goDown = false;
         }
+    }
 
+    IEnumerator ShootRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(LevelManager.Instance.EnemyBulletCD);
+            enemyRows[enemyRows.Count - 1].Shoot();
+        }
+    }
+
+    public void RemoveRow(EnemyRow rowToRemove)
+    {
+        enemyRows.Remove(rowToRemove);
     }
 }

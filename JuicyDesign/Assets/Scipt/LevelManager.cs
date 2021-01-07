@@ -68,6 +68,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private float enemyBulletSpeed = 4;
     [SerializeField]
+    private float enemyBulletCD = 4;
+    [SerializeField]
     private Vector2 enemySize = Vector2.one;
     [SerializeField]
     private float enemyYOffset = 0.5f;
@@ -77,6 +79,7 @@ public class LevelManager : MonoBehaviour
     public int NbEnemyInRow { get => nbEnemyInRow;}
     public int NbRow { get => nbRow;}
     public float EnemyBulletSpeed { get => enemyBulletSpeed;}
+    public float EnemyBulletCD { get => enemyBulletCD; }
     public Vector2 EnemySize { get => enemySize;}
     public float EnemyYOffset { get => enemyYOffset; }
     #endregion

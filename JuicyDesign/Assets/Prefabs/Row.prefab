@@ -45,3 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 5716109021628249457, guid: cbb26b1271cff8442be1d18da35b2b7a,
     type: 3}
+  bullet: {fileID: 7194099771541349354, guid: 583ebac90e6e77541aa98e5f919cb709, type: 3}

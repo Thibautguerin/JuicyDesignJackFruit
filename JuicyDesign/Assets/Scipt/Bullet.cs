@@ -34,12 +34,18 @@ public class Bullet : MonoBehaviour
         if (activeBulletEffects)
         {
             float randRotation = Random.Range(LevelManager.Instance.ShipBulletRotSpeedMin, LevelManager.Instance.ShipBulletRotSpeedMax);
-            gameObject.transform.Rotate(Vector2.up, randRotation);
+            if(direction == Direction.UP)
+                gameObject.transform.Rotate(Vector2.up, randRotation);
+            else
+                gameObject.transform.Rotate(Vector2.down, randRotation);
             gameObject.transform.GetChild(0).GetComponent<TrailRenderer>().enabled = true;
         }
         else
         {
-            gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
+            if(direction == Direction.UP)
+                gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
+            else
+                gameObject.transform.rotation = Quaternion.Euler(0,0,180);
             gameObject.transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
         }
     }
