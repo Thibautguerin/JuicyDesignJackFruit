@@ -17,11 +17,17 @@ public class Bullet : MonoBehaviour
     private MeshRenderer visibleRender;
     private Coroutine routine;
     private bool radarState;
+    [SerializeField]
+    private GameObject player;
+    [SerializeField]
+    private GameObject enemy;
 
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         visibleRender = transform.GetChild(1).GetComponent<MeshRenderer>();
+        enemy.SetActive(false);
+        player.SetActive(false);
     }
 
     void Update()
@@ -91,6 +97,10 @@ public class Bullet : MonoBehaviour
             color = visibleRender.material.color;
             color.a = 1;
             visibleRender.material.color = color;
+            if (direction == Direction.UP)
+                player.SetActive(true);
+            else
+                enemy.SetActive(true);
             return;
         }
         if (collision.tag == "Scan")
@@ -136,6 +146,13 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    public void IsEnemyShoot()
+    {
+        enemy.SetActive(true);
+        player.SetActive(false);
+        direction = Direction.DOWN;
+    }
+
     IEnumerator fadeRoutine()
     {
         float maxTime = LevelManager.Instance.RadarFadeDuration;
@@ -151,6 +168,8 @@ public class Bullet : MonoBehaviour
             color.a = Mathf.Lerp(0, 1, 1 - (timer / maxTime));
             visibleRender.material.color = color;
         }
+        enemy.SetActive(false);
+        player.SetActive(false);
         routine = null;
     }
 }

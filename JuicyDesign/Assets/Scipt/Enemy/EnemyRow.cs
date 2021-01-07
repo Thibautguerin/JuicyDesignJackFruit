@@ -11,7 +11,6 @@ public class EnemyRow : MonoBehaviour
 
     private EnemyManager enemyManager;
 
-
     private static bool moveRight = true;
     // Start is called before the first frame update
     void Start()
@@ -60,6 +59,6 @@ public class EnemyRow : MonoBehaviour
         enemy.audioSource.PlayOneShot(enemy.shotSound);
 
         Bullet instance = Instantiate(bullet, randChild.position, Quaternion.Euler(0,0,180));
-        instance.direction = Bullet.Direction.DOWN;
+        instance.IsEnemyShoot();
     }
 }
