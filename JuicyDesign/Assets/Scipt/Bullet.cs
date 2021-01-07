@@ -104,7 +104,7 @@ public class Bullet : MonoBehaviour
             color = visibleRender.material.color;
             color.a = 1;
             visibleRender.material.color = color;
-            if (!LevelManager.Instance.activationInputs.Find(x => x.name == "Juicy VFX").isActive)
+            if (LevelManager.Instance.activationInputs.Find(x => x.name == "Juicy VFX").isActive)
             {
                 if (direction == Direction.UP)
                     player.SetActive(true);
@@ -164,7 +164,7 @@ public class Bullet : MonoBehaviour
 
     public void IsEnemyShoot()
     {
-        if (LevelManager.Instance.activationInputs.Find(x => x.name == "Juicy VFX").isActive)
+        if (LevelManager.Instance.activationInputs.Find(x => x.name == "Juicy VFX").isActive && !LevelManager.Instance.activationInputs.Find(x => x.name == "Radar").isActive)
         {
             enemy.SetActive(true);
             player.SetActive(false);
