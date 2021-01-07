@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2857872664986689806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2857872664986689811}
+  - component: {fileID: 2857872664986689804}
+  - component: {fileID: 2857872664986689805}
+  m_Layer: 20
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2857872664986689811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2857872664986689806}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.120967, y: -0.054754816, z: -0.13476562}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2857872664986689804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2857872664986689806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c99c2efb6dda43948b7b6293b651faa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shipSpeed: 8
+  shipHp: 1
+  shipCooldown: 1
+  shipBulletSpeed: 4
+  shipBulletRotSpeedMin: 0.5
+  shipBulletRotSpeedMax: 1.5
+  shipAcceleration: 4
+  shipDeceleration: 4
+  shipMaxRotationY: 50
+  shipMaxRotationZ: 25
+  enemySpeed: 2
+  nbEnemyInRow: 5
+  nbRow: 3
+  enemyBulletSpeed: 4
+  enemySize: {x: 1.5, y: 1.5}
+  enemyYOffset: 0.5
+  radarRotationSpeed: 180
+  radarFadeDuration: 0.5
+  activationInputs:
+  - name: Player Inertia
+    input: 105
+    isActive: 0
+  - name: Bullet Effect
+    input: 98
+    isActive: 0
+  - name: Radar
+    input: 127
+    isActive: 0
+--- !u!114 &2857872664986689805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2857872664986689806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 86f8284ec39ae43468e70448f62677ef, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0

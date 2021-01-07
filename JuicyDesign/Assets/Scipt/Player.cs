@@ -47,12 +47,12 @@ public class Player : MonoBehaviour
                     actualSpeed += LevelManager.Instance.ShipDeceleration * Time.deltaTime;
             }
 
-            gameObject.transform.rotation = Quaternion.Euler(0, -horizontal * LevelManager.Instance.ShipMaxRotationY, -horizontal * LevelManager.Instance.ShipMaxRotationZ);
+            gameObject.transform.rotation = Quaternion.Euler(0, 180-horizontal * LevelManager.Instance.ShipMaxRotationY, horizontal * LevelManager.Instance.ShipMaxRotationZ);
         }
         else
         {
             actualSpeed = horizontal * LevelManager.Instance.ShipSpeed;
-            gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
 
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(actualSpeed, 0);

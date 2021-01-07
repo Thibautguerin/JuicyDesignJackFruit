@@ -267,7 +267,7 @@ PrefabInstance:
     - target: {fileID: 2966595411362853009, guid: e1c7b49830681b94f9d1f76e68dfb855,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.08
+      value: -4.77
       objectReference: {fileID: 0}
     - target: {fileID: 2966595411362853009, guid: e1c7b49830681b94f9d1f76e68dfb855,
         type: 3}
@@ -385,7 +385,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992831256}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -11.38}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -485,9 +485,12 @@ MonoBehaviour:
   shipHp: 1
   shipCooldown: 1
   shipBulletSpeed: 2
+  shipBulletRotSpeedMin: 0.5
+  shipBulletRotSpeedMax: 1.5
   shipAcceleration: 4
   shipDeceleration: 4
-  shipMaxRotation: 25
+  shipMaxRotationY: 50
+  shipMaxRotationZ: 25
   enemySpeed: 2
   nbEnemyInRow: 5
   nbRow: 3
