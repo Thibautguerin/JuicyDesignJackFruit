@@ -112,7 +112,7 @@ public class Bullet : MonoBehaviour
         {
             if (direction == Direction.DOWN)
                 return;
-            Destroy(collision.gameObject);
+            collision.GetComponent<Enemy>().Destruction();
             LevelManager.Instance.CameraAnimator.SetTrigger("ShipHit");
         }
 

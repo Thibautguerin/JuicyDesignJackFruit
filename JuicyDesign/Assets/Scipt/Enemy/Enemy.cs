@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Enemy : MonoBehaviour
 {
@@ -16,10 +17,12 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float offsetSpeed = 0.1f;
 
-    private AudioClip shotSound;
-    private AudioClip destructionSound;
+    [HideInInspector]
+    public AudioClip shotSound;
+    [HideInInspector]
+    public AudioSource audioSource;
 
-    private AudioSource audioSource;
+    private AudioClip destructionSound;
 
     private void Awake()
     {
@@ -88,6 +91,16 @@ public class Enemy : MonoBehaviour
             visibleRender.material.color = color;
             routine = StartCoroutine(fadeRoutine());
         }
+    }
+
+    public void Destruction()
+    {
+        audioSource.PlayOneShot(destructionSound);
+        transform.DORotate(new Vector3(0, 180, 180), 1.5f);
+        transform.DOScale(0.01f, 2).OnComplete(() =>
+        {
+            Destroy(gameObject);
+        });
     }
 
     IEnumerator fadeRoutine()

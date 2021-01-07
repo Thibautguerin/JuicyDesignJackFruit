@@ -98,6 +98,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxXOffset: 1
   offsetSpeed: 0.1
+  shotSound: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!61 &2487186683610038805
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -166,7 +168,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

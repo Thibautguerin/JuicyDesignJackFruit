@@ -54,7 +54,12 @@ public class EnemyRow : MonoBehaviour
     public void Shoot()
     {
         int random = Random.Range(0, transform.childCount);
-        Bullet instance = Instantiate(bullet, transform.GetChild(random).position, Quaternion.Euler(0,0,180));
+        Transform randChild = transform.GetChild(random);
+        Enemy enemy = randChild.GetComponent<Enemy>();
+
+        enemy.audioSource.PlayOneShot(enemy.shotSound);
+
+        Bullet instance = Instantiate(bullet, randChild.position, Quaternion.Euler(0,0,180));
         instance.direction = Bullet.Direction.DOWN;
     }
 }
