@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
@@ -60,6 +61,10 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && canShoot)
         {
             LevelManager.Instance.CameraAnimator.SetTrigger("Shooting");
+            transform.DOMoveY(transform.position.y - 0.7f, 0.18f).OnComplete(() =>
+            {
+                transform.DOMoveY(transform.position.y + 0.7f, 0.08f);
+            });
             Instantiate(bullet, transform.position, Quaternion.identity);
             canShoot = false;
             startCooldown = Time.time;
