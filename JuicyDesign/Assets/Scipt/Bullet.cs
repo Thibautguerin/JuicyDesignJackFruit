@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
     {
         meshRenderer = GetComponent<MeshRenderer>();
         visibleRender = transform.GetChild(0).GetComponent<MeshRenderer>();
-        if (LevelManager.Instance.activationInputs.Find(x => x.name == "Radar").isActive)
+        if (LevelManager.Instance.activationInputs.Find(x => x.name == "Radar").isActive || !LevelManager.Instance.activationInputs.Find(x => x.name == "Juicy VFX").isActive)
         {
             enemy.SetActive(false);
             player.SetActive(false);
@@ -48,12 +48,11 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        bool activeBulletEffects = false;
 
-        foreach (var item in LevelManager.Instance.activationInputs)
+        if(!LevelManager.Instance.activationInputs.Find(x => x.name == "Juicy VFX").isActive)
         {
-            if (item.name == "Bullet Effect")
-                activeBulletEffects = item.isActive;
+            enemy.SetActive(false);
+            player.SetActive(false);
         }
 
         if (direction == Direction.UP)
@@ -84,9 +83,12 @@ public class Bullet : MonoBehaviour
     {
         if (collision.tag == "Scan" && LevelManager.Instance.activationInputs.Find(x => x.name == "Radar").isActive)
         {
-            audioSource.PlayOneShot(radarSound);
-            if (direction != Direction.UP && (transform.position - collision.transform.position).magnitude <= 3)
-                collision.transform.parent.GetComponent<AudioSource>().PlayOneShot(alarmSound);
+            if (LevelManager.Instance.activationInputs.Find(x => x.name == "Sounds").isActive)
+            {
+                audioSource.PlayOneShot(radarSound);
+                if (direction != Direction.UP && (transform.position - collision.transform.position).magnitude <= 3)
+                    collision.transform.parent.GetComponent<AudioSource>().PlayOneShot(alarmSound);
+            }
             if (routine != null)
             {
                 StopCoroutine(routine);
@@ -98,10 +100,13 @@ public class Bullet : MonoBehaviour
             color = visibleRender.material.color;
             color.a = 1;
             visibleRender.material.color = color;
-            if (direction == Direction.UP)
-                player.SetActive(true);
-            else
-                enemy.SetActive(true);
+            if (!LevelManager.Instance.activationInputs.Find(x => x.name == "Juicy VFX").isActive)
+            {
+                if (direction == Direction.UP)
+                    player.SetActive(true);
+                else
+                    enemy.SetActive(true);
+            }
             return;
         }
         if (collision.tag == "Scan")
@@ -116,7 +121,8 @@ public class Bullet : MonoBehaviour
             if (player)
             {
                 player.TakeDamage();
-                LevelManager.Instance.CameraAnimator.SetTrigger("SubmarineHit");
+                if(LevelManager.Instance.activationInputs.Find(x => x.name == "Shake").isActive)
+                    LevelManager.Instance.CameraAnimator.SetTrigger("SubmarineHit");
             }
         }
        else if (collision.CompareTag("Enemy"))
@@ -124,13 +130,18 @@ public class Bullet : MonoBehaviour
             if (direction == Direction.DOWN)
                 return;
             collision.GetComponent<Enemy>().Destruction();
-            LevelManager.Instance.CameraAnimator.SetTrigger("ShipHit");
+            if (LevelManager.Instance.activationInputs.Find(x => x.name == "Shake").isActive)
+                LevelManager.Instance.CameraAnimator.SetTrigger("ShipHit");
         }
 
         Destroy(gameObject);
-        Vector3 position = transform.position + Vector3.forward * -1;
-        GameObject instance = Instantiate(explosion, position, Quaternion.identity);
-        Destroy(instance, 1.5f);
+
+        if (LevelManager.Instance.activationInputs.Find(x => x.name == "Juicy VFX").isActive)
+        {
+            Vector3 position = transform.position + Vector3.forward * -1;
+            GameObject instance = Instantiate(explosion, position, Quaternion.identity);
+            Destroy(instance, 1.5f);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -149,8 +160,11 @@ public class Bullet : MonoBehaviour
 
     public void IsEnemyShoot()
     {
-        enemy.SetActive(true);
-        player.SetActive(false);
+        if (LevelManager.Instance.activationInputs.Find(x => x.name == "Juicy VFX").isActive)
+        {
+            enemy.SetActive(true);
+            player.SetActive(false);
+        }
         direction = Direction.DOWN;
     }
 
