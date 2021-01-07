@@ -124,6 +124,7 @@ public class Player : MonoBehaviour
         if (actualHp <= 0)
         {
             canMove = false;
+            Destroy(transform.GetChild(3).gameObject);
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             transform.DOScale(0.01f, 2).OnComplete(() =>
             {
