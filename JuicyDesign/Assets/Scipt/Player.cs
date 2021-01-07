@@ -23,6 +23,12 @@ public class Player : MonoBehaviour
     private AudioSource audioSource;
     private AudioSource motorAudioSource;
 
+    private bool activeSubmarine = false;
+    private bool activeShake = false;
+    private bool activeSounds = false;
+    private bool activeRadar = false;
+    private bool activeJuicyVFX = false;
+
     private void Start()
     {
         actualHp = LevelManager.Instance.ShipHp;
@@ -42,29 +48,52 @@ public class Player : MonoBehaviour
 
         audioSource.loop = true;
         audioSource.clip = movementSound;
-        audioSource.Play();
 
         motorAudioSource = transform.GetChild(0).GetComponent<AudioSource>();
         motorAudioSource.loop = true;
         motorAudioSource.clip = motorSound;
-        motorAudioSource.Play();
     }
 
     void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
-        bool activeInertia = false;
 
         foreach (var item in LevelManager.Instance.activationInputs)
         {
-            if (item.name == "Player Inertia")
-                activeInertia = item.isActive;
+            if (item.name == "Submarine")
+                activeSubmarine = item.isActive;
+            if (item.name == "Sounds")
+                activeSounds = item.isActive;
+            if (item.name == "Shake")
+                activeShake = item.isActive;
+            if (item.name == "Radar")
+                activeRadar = item.isActive;
+            if (item.name == "Juicy VFX")
+                activeJuicyVFX = item.isActive;
+        }
+
+        transform.GetChild(2).gameObject.SetActive(activeJuicyVFX);
+        if (transform.childCount == 4)
+            transform.GetChild(3).gameObject.SetActive(activeRadar);
+
+        if (activeSounds)
+        {
+            if (!audioSource.isPlaying)
+                audioSource.Play();
+            if (!motorAudioSource.isPlaying)
+                motorAudioSource.Play();
+        }
+        else
+        {
+            audioSource.Stop();
+            motorAudioSource.Stop();
         }
 
         if (canMove)
         {
-            if (activeInertia)
+            if (activeSubmarine)
             {
+                
                 if (horizontal > 0)
                 {
                     if (actualSpeed < LevelManager.Instance.ShipSpeed)
@@ -96,16 +125,24 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && canShoot && canMove)
         {
-            audioSource.PlayOneShot(shotSound);
-            imageCooldown.DOFillAmount(1, LevelManager.Instance.ShipCooldown).OnComplete(() =>
+            if (activeSounds)
+                audioSource.PlayOneShot(shotSound);
+            if (activeSubmarine)
             {
-                imageCooldown.fillAmount = 0f;
-            });
-            LevelManager.Instance.CameraAnimator.SetTrigger("Shooting");
-            transform.DOMoveY(transform.position.y - 0.2f, 0.18f).OnComplete(() =>
+                imageCooldown.DOFillAmount(1, LevelManager.Instance.ShipCooldown).OnComplete(() =>
+                {
+                    imageCooldown.fillAmount = 0f;
+                });
+            }
+            if (activeShake)
+                LevelManager.Instance.CameraAnimator.SetTrigger("Shooting");
+            if (activeSubmarine)
             {
-                transform.DOMoveY(transform.position.y + 0.2f, 0.15f);
-            });
+                transform.DOMoveY(transform.position.y - 0.2f, 0.18f).OnComplete(() =>
+                {
+                    transform.DOMoveY(transform.position.y + 0.2f, 0.15f);
+                });
+            }
             Instantiate(bullet, transform.position, Quaternion.identity);
             canShoot = false;
             startCooldown = Time.time;
@@ -119,18 +156,28 @@ public class Player : MonoBehaviour
 
     public void TakeDamage()
     {
-        audioSource.PlayOneShot(destructionSound);
+        if (activeSounds)
+            audioSource.PlayOneShot(destructionSound);
         actualHp--;
         if (actualHp <= 0)
         {
             canMove = false;
             Destroy(transform.GetChild(3).gameObject);
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            transform.DOScale(0.01f, 2).OnComplete(() =>
+
+            if (activeSubmarine)
+            {
+                transform.DOScale(0.01f, 2).OnComplete(() =>
+                {
+                    Destroy(gameObject);
+                    LevelManager.Instance.gameObject.AddComponent(typeof(AudioListener));
+                });
+            }
+            else
             {
                 Destroy(gameObject);
                 LevelManager.Instance.gameObject.AddComponent(typeof(AudioListener));
-            });
+            }
         }
     }
 
