@@ -22,6 +22,10 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private GameObject enemy;
 
+    private AudioClip radarSound;
+    private AudioClip alarmSound;
+    private AudioSource audioSource;
+
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
@@ -30,6 +34,15 @@ public class Bullet : MonoBehaviour
         {
             enemy.SetActive(false);
             player.SetActive(false);
+        }
+
+        audioSource = GetComponent<AudioSource>();
+        foreach (var item in LevelManager.Instance.sounds)
+        {
+            if (item.name == "Radar Sound")
+                radarSound = item.sound;
+            if (item.name == "Alarm Sound")
+                alarmSound = item.sound;
         }
     }
 
@@ -71,6 +84,9 @@ public class Bullet : MonoBehaviour
     {
         if (collision.tag == "Scan" && LevelManager.Instance.activationInputs.Find(x => x.name == "Radar").isActive)
         {
+            audioSource.PlayOneShot(radarSound);
+            if (direction != Direction.UP && (transform.position - collision.transform.position).magnitude <= 3)
+                collision.transform.parent.GetComponent<AudioSource>().PlayOneShot(alarmSound);
             if (routine != null)
             {
                 StopCoroutine(routine);

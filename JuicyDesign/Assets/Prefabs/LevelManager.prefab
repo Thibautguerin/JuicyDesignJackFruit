@@ -86,6 +86,8 @@ MonoBehaviour:
     sound: {fileID: 8300000, guid: 66a5b46600d5e4b4a94c164a0258c885, type: 3}
   - name: Radar Sound
     sound: {fileID: 8300000, guid: b85f80f585af29b48aade43bea6c8d39, type: 3}
+  - name: Alarm Sound
+    sound: {fileID: 8300000, guid: 9fb144b5435070741962801426043899, type: 3}
 --- !u!114 &2857872664986689805
 MonoBehaviour:
   m_ObjectHideFlags: 0
