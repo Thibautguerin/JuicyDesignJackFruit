@@ -66,14 +66,29 @@ MonoBehaviour:
   radarFadeDuration: 0.5
   cameraAnimator: {fileID: 0}
   activationInputs:
-  - name: Player Inertia
-    input: 105
+  - name: Submarine
+    input: 282
     isActive: 0
-  - name: Bullet Effect
-    input: 98
+  - name: Enemy
+    input: 283
+    isActive: 0
+  - name: Shake
+    input: 284
+    isActive: 0
+  - name: Juicy Camera
+    input: 285
+    isActive: 0
+  - name: Juicy VFX
+    input: 286
     isActive: 0
   - name: Radar
-    input: 127
+    input: 287
+    isActive: 0
+  - name: Sounds
+    input: 288
+    isActive: 0
+  - name: Camera Angle
+    input: 289
     isActive: 0
   sounds:
   - name: Shot Sound
