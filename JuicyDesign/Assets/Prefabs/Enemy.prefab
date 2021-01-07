@@ -95,6 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ee82e72a52e0f46acccdee55957438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxXOffset: 1
+  offsetSpeed: 0.1
 --- !u!61 &2487186683610038805
 BoxCollider2D:
   m_ObjectHideFlags: 0
