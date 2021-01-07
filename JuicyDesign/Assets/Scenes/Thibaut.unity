@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 49683909}
   - component: {fileID: 49683908}
   - component: {fileID: 49683911}
+  - component: {fileID: 49683912}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -174,7 +175,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -221,6 +222,8 @@ MonoBehaviour:
   shipHp: 1
   shipCooldown: 1
   shipBulletSpeed: 4
+  shipBulletRotSpeedMin: 0.5
+  shipBulletRotSpeedMax: 1.5
   shipAcceleration: 4
   shipDeceleration: 4
   shipMaxRotationY: 50
@@ -229,10 +232,12 @@ MonoBehaviour:
   nbEnemyInRow: 5
   nbRow: 3
   enemyBulletSpeed: 4
+  enemyBulletCD: 4
   enemySize: {x: 1, y: 1}
   enemyYOffset: 0.5
   radarRotationSpeed: 180
   radarFadeDuration: 0.5
+  cameraAnimator: {fileID: 49683912}
   activationInputs:
   - name: Player Inertia
     input: 105
@@ -240,6 +245,25 @@ MonoBehaviour:
   - name: Bullet Effect
     input: 98
     isActive: 0
+--- !u!95 &49683912
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49683907}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 390940c7c49c72d41a409c5c008780bb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &467995124
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,6 +538,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Submarine
       objectReference: {fileID: 0}
+    - target: {fileID: 7687794213051214424, guid: 59e8192d4dc8b0e46b19114b64614052,
+        type: 3}
+      propertyPath: cameraAnimator
+      value: 
+      objectReference: {fileID: 49683912}
     - target: {fileID: 7870657619810438589, guid: 59e8192d4dc8b0e46b19114b64614052,
         type: 3}
       propertyPath: m_RootOrder

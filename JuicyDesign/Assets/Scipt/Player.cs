@@ -59,6 +59,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && canShoot)
         {
+            LevelManager.Instance.CameraAnimator.SetTrigger("Shooting");
             Instantiate(bullet, transform.position, Quaternion.identity);
             canShoot = false;
             startCooldown = Time.time;

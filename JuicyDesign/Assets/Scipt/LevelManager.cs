@@ -92,10 +92,13 @@ public class LevelManager : MonoBehaviour
     private float radarRotationSpeed = 180;
     [SerializeField]
     private float radarFadeDuration = 0.5f;
+    [SerializeField]
+    private Animator cameraAnimator;
 
     #region Geter
     public float RadarRotationSpeed { get => radarRotationSpeed;}
-    public float RadarFadeDuration { get => radarFadeDuration; }
+    public float RadarFadeDuration { get => radarFadeDuration;}
+    public Animator CameraAnimator { get => cameraAnimator;}
     #endregion
 
     #endregion
