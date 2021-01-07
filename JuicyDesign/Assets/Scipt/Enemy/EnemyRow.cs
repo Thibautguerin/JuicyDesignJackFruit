@@ -56,7 +56,8 @@ public class EnemyRow : MonoBehaviour
         Transform randChild = transform.GetChild(random);
         Enemy enemy = randChild.GetComponent<Enemy>();
 
-        enemy.audioSource.PlayOneShot(enemy.shotSound);
+        if(LevelManager.Instance.activationInputs.Find(x => x.name == "Sounds").isActive)
+            enemy.audioSource.PlayOneShot(enemy.shotSound);
 
         Bullet instance = Instantiate(bullet, randChild.position, Quaternion.Euler(0,0,180));
         instance.IsEnemyShoot();
