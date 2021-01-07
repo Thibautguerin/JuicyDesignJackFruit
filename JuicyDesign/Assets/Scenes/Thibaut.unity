@@ -245,6 +245,9 @@ MonoBehaviour:
   - name: Bullet Effect
     input: 98
     isActive: 0
+  - name: Radar
+    input: 116
+    isActive: 0
 --- !u!95 &49683912
 Animator:
   serializedVersion: 3
