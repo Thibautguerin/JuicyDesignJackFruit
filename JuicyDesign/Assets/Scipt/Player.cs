@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     public Bullet bullet;
+    public Image imageCooldown;
 
     private float actualHp;
     private float actualSpeed;
@@ -95,6 +97,10 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && canShoot && canMove)
         {
             audioSource.PlayOneShot(shotSound);
+            imageCooldown.DOFillAmount(1, LevelManager.Instance.ShipCooldown).OnComplete(() =>
+            {
+                imageCooldown.fillAmount = 0f;
+            });
             LevelManager.Instance.CameraAnimator.SetTrigger("Shooting");
             transform.DOMoveY(transform.position.y - 0.2f, 0.18f).OnComplete(() =>
             {
