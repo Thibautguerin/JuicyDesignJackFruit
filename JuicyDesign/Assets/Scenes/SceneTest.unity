@@ -622,7 +622,7 @@ PrefabInstance:
     - target: {fileID: 2857872664986689804, guid: a1f483b8146096344a55451dde18693f,
         type: 3}
       propertyPath: radarFadeDuration
-      value: 0.75
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 2857872664986689804, guid: a1f483b8146096344a55451dde18693f,
         type: 3}
