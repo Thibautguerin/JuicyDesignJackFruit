@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    public GameObject Menu;
+
     [SerializeField]
     private EnemyRow enemyRowPrefab;
 
@@ -47,15 +49,18 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator ShootRoutine()
     {
-        while (true)
+        while (enemyRows.Count > 0)
         {
             yield return new WaitForSeconds(LevelManager.Instance.EnemyBulletCD);
-            enemyRows[enemyRows.Count - 1].Shoot();
+            if (enemyRows.Count > 0)
+                enemyRows[enemyRows.Count - 1].Shoot();
         }
     }
 
     public void RemoveRow(EnemyRow rowToRemove)
     {
         enemyRows.Remove(rowToRemove);
+        if (enemyRows.Count <= 0)
+            Menu.SetActive(true);
     }
 }

@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     public Bullet bullet;
     public Image imageCooldown;
+    public GameObject Menu;
 
     private float actualHp;
     private float actualSpeed;
@@ -191,6 +192,7 @@ public class Player : MonoBehaviour
                     Destroy(gameObject);
                 LevelManager.Instance.gameObject.AddComponent(typeof(AudioListener));
             }
+            Menu.SetActive(true);
         }
     }
 
