@@ -91,7 +91,7 @@ public class Bullet : MonoBehaviour
                 if (direction != Direction.UP)
                     audioSource.PlayOneShot(radarSound);
                 if (direction != Direction.UP && (transform.position - collision.transform.position).magnitude <= 3)
-                    collision.transform.parent.GetComponent<AudioSource>().PlayOneShot(alarmSound);
+                    FindObjectOfType<Player>().GetComponent<AudioSource>().PlayOneShot(alarmSound);
             }
             if (routine != null)
             {

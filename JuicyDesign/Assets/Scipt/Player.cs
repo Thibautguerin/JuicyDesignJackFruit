@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     private bool activeSounds = false;
     private bool activeRadar = false;
     private bool activeJuicyVFX = false;
+    private Transform radar;
 
     private void Start()
     {
@@ -52,6 +53,9 @@ public class Player : MonoBehaviour
         motorAudioSource = transform.GetChild(0).GetComponent<AudioSource>();
         motorAudioSource.loop = true;
         motorAudioSource.clip = motorSound;
+
+        radar = transform.GetChild(3);
+        radar.parent = null;
     }
 
     void Update()
@@ -73,8 +77,11 @@ public class Player : MonoBehaviour
         }
 
         transform.GetChild(2).gameObject.SetActive(activeJuicyVFX);
-        if (transform.childCount == 4)
-            transform.GetChild(3).gameObject.SetActive(activeRadar);
+        if (radar != null)
+        {
+            radar.gameObject.SetActive(activeRadar);
+            radar.position = transform.position;
+        }
 
         if (activeSounds)
         {
@@ -162,7 +169,7 @@ public class Player : MonoBehaviour
         if (actualHp <= 0)
         {
             canMove = false;
-            Destroy(transform.GetChild(3).gameObject);
+            Destroy(radar.gameObject);
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
             if (activeSubmarine)
