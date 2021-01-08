@@ -827,12 +827,12 @@ PrefabInstance:
     - target: {fileID: 2857872664986689804, guid: a1f483b8146096344a55451dde18693f,
         type: 3}
       propertyPath: radarFadeDuration
-      value: 1
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 2857872664986689804, guid: a1f483b8146096344a55451dde18693f,
         type: 3}
       propertyPath: radarRotationSpeed
-      value: 70
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 2857872664986689805, guid: a1f483b8146096344a55451dde18693f,
         type: 3}
