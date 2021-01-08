@@ -137,6 +137,7 @@ public class LevelManager : MonoBehaviour
             Camera.main.transform.rotation = Quaternion.Euler(-25, 0, 0);
             cameraChange = !cameraChange;
         }
+        cameraAnimator.SetBool("CamState", cameraChange);
         foreach (var item in activationInputs)
         {
             if (Input.GetKeyDown(item.input))
