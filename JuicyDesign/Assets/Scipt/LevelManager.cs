@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
@@ -104,6 +105,9 @@ public class LevelManager : MonoBehaviour
 
     #endregion
 
+    [Header("HelpHUD")]
+    public GameObject helpHUD;
+
     [Header("EffectInputs")]
     public List<ActivationInput> activationInputs = new List<ActivationInput>();
 
@@ -141,7 +145,16 @@ public class LevelManager : MonoBehaviour
         foreach (var item in activationInputs)
         {
             if (Input.GetKeyDown(item.input))
+            {
                 item.isActive = !item.isActive;
+                if (item.name == "Help")
+                    helpHUD.SetActive(item.isActive);
+                else if (item.isActive)
+                    item.UIText.color = new Color32(65, 201, 156, 255);
+                else
+                    item.UIText.color = new Color32(255, 255, 255, 255);
+
+            }
         }
         if (!postProcess.enabled && activationInputs.Find(x => x.name == "Juicy Camera").isActive)
             postProcess.enabled = true;
@@ -159,6 +172,7 @@ public class ActivationInput
 {
     public string name;
     public KeyCode input;
+    public TextMeshProUGUI UIText;
     public bool isActive = false;
 }
 
