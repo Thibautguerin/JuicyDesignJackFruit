@@ -112,6 +112,7 @@ public class LevelManager : MonoBehaviour
 
     private PostProcessLayer postProcess;
     private AudioSource audioSource;
+    private bool cameraChange = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -124,6 +125,18 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (cameraChange && !activationInputs.Find(x => x.name == "Camera Angle").isActive)
+        { 
+            Camera.main.transform.position = new Vector3(0, 0, -10);
+            Camera.main.transform.rotation = Quaternion.Euler(0, 0, 0);
+            cameraChange = !cameraChange;
+        }
+        else if(!cameraChange && activationInputs.Find(x => x.name == "Camera Angle").isActive)
+        {
+            Camera.main.transform.position = new Vector3(0, -5.2f, -10);
+            Camera.main.transform.rotation = Quaternion.Euler(-25, 0, 0);
+            cameraChange = !cameraChange;
+        }
         foreach (var item in activationInputs)
         {
             if (Input.GetKeyDown(item.input))
